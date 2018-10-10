@@ -2,6 +2,7 @@ const express = require("express");
 const hbs = require("hbs");
 const fs = require("fs");
 
+const port = process.env.PORT || 3003;
 var app = express();
 
 hbs.registerPartials(__dirname + "/views/partials");
@@ -19,12 +20,12 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  res.render("maintenance.hbs", {
-    maintText: "Coming Soon",
-    pageTitle: "Becoming more"
-  });
-});
+// app.use((req, res, next) => {
+//   res.render("maintenance.hbs", {
+//     maintText: "Coming Soon",
+//     pageTitle: "Becoming more"
+//   });
+// });
 
 app.use(express.static(__dirname + "/public"));
 
@@ -55,5 +56,4 @@ app.get("/bad", (req, res) => {
   });
 });
 
-var serverPort = parseInt(process.env.PORT, 10) || 3003;
-app.listen(serverPort);
+app.listen(port);
